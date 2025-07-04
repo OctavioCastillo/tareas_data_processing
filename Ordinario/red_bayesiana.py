@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import time
 from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import KBinsDiscretizer
 from customer_data import CustomerData
@@ -37,14 +38,24 @@ class RedBayesiana:
 
         # Modelo bayesiano
         modelo = GaussianNB()
+        inicio_entrenamiento = time.time()
         modelo.fit(X, y)
+        fin_entrenamiento = time.time()
+        tiempo_entrenamiento = fin_entrenamiento - inicio_entrenamiento
+        print(f"[INFO] Tiempo de entrenamiento: {tiempo_entrenamiento:.4f} segundos")
 
-        # Probabilidades predichas
+        # Predicción e interpretación
+        inicio_interpretacion = time.time()
         probabilidades = modelo.predict_proba(X)
+        fin_interpretacion = time.time()
+        tiempo_interpretacion = fin_interpretacion - inicio_interpretacion
+        print(f"[INFO] Tiempo de interpretación: {tiempo_interpretacion:.4f} segundos")
+
+        # Agregar columnas de probabilidad
         df['Prob_Baja'] = probabilidades[:, 0]
         df['Prob_Alta'] = probabilidades[:, 1]
 
-        print("[INFO] Probabilidades promedio:")
+        print("\n[INFO] Probabilidades promedio:")
         print("   - Baja deuda: {:.2f}".format(df['Prob_Baja'].mean()))
         print("   - Alta deuda: {:.2f}".format(df['Prob_Alta'].mean()))
 
