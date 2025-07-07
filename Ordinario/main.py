@@ -2,14 +2,14 @@
 from regresion_lineal import RegresionLineal
 from red_bayesiana import RedBayesiana
 #from red_neuronal import RedNeuronal
-#from algoritmo_genetico import AlgoritmoGenetico
+from seleccion_clonal import SeleccionClonal
 
 def mostrar_menu():
     print("\n====== MENÚ DE MODELOS DE PREDICCIÓN ======")
     print("1. Regresión Lineal")
     print("2. Red Bayesiana")
     print("3. Red Neuronal")
-    print("4. Algoritmo Genético")
+    print("4. Selección Clonal")
     print("0. Salir")
     opcion = input("Seleccione una opción: ")
     return opcion
@@ -26,10 +26,10 @@ def main():
             modelo.ejecutar()
         # elif opcion == '3':
         #     modelo = RedNeuronal()
-        #     modelo.predecir()
-        # elif opcion == '4':
-        #     modelo = AlgoritmoGenetico()
-        #     modelo.predecir()
+        #     modelo.ejecutar()
+        elif opcion == '4':
+            modelo = SeleccionClonal()
+            modelo.ejecutar()
         elif opcion == '0':
             print("Saliendo del programa. ¡Hasta luego!")
             break
@@ -38,3 +38,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
